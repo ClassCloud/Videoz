@@ -41,6 +41,9 @@ function createGallery($title, $sort, $rowCount, $getName, $mostWord, $lessWord,
         <?php
         $countCols = 0;
         unset($_POST['sort']);
+        if(empty($_GET['page'])){
+            $_GET['page'] = 1;
+        }
         $_POST['sort'][$sort] = $_GET[$getName];
         $_POST['current'] = $_GET['page'];
         $_POST['rowCount'] = $rowCount;
@@ -142,6 +145,9 @@ function createGallerySection($videos, $crc = "", $get = array()) {
                     <?php if (!empty($imgGif)) { ?>
                         <img src="<?php echo $global['webSiteRootURL']; ?>img/loading-gif.png" data-src="<?php echo $imgGif; ?>" style="position: absolute; top: 0; display: none;" alt="<?php echo $value['title']; ?>" id="thumbsGIF<?php echo $value['id']; ?>" class="thumbsGIF img-responsive <?php echo $img_portrait; ?>  rotate<?php echo $value['rotation']; ?>" height="130" />
                     <?php } ?>
+                    <?php
+                        echo YouPHPTubePlugin::thumbsOverlay($value['id']);
+                    ?>
                 </div>
                 <span class="duration"><?php echo Video::getCleanDuration($value['duration']); ?></span>
                 <div class="progress" style="height: 3px; margin-bottom: 2px;">

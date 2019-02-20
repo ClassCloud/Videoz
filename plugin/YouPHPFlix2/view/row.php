@@ -1,9 +1,12 @@
 <?php
+global $advancedCustom;
 $uid = uniqid();
 $landscape = "rowPortrait";
 if (!empty($obj->landscapePosters)) {
     $landscape = "landscapeTile";
 }
+$get = $_GET;
+$post = $_POST;
 ?>
 <div class="carousel <?php echo $landscape; ?>" data-flickity='<?php echo json_encode($dataFlickirty) ?>'>
     <?php
@@ -68,7 +71,7 @@ foreach ($videos as $value) {
                 ?>
 
                 <?php
-                if (empty($advancedCustom->doNotDisplayViews)) {
+                if (!empty($advancedCustom) && empty($advancedCustom->doNotDisplayViews)) {
                     ?> 
                     <span class="label label-default"><i class="fa fa-eye"></i> <?php echo $value['views_count']; ?></span>
                 <?php } ?>
@@ -87,7 +90,7 @@ foreach ($videos as $value) {
                 <?php
                 if (!empty($value['rrating'])) {
                     include $global['systemRootPath'] . 'view/rrating/rating-' . $value['rrating'] . '.php';
-                }else if($advancedCustom->showNotRatedLabel){
+                }else if(!empty($advancedCustom) && $advancedCustom->showNotRatedLabel){
                     include $global['systemRootPath'] . 'view/rrating/notRated.php';
                 }
                 ?>
@@ -139,4 +142,5 @@ foreach ($videos as $value) {
     <?php
 }
 
-
+$_GET = $get;
+$_POST = $post;

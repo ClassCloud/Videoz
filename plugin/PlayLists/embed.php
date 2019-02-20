@@ -77,6 +77,9 @@ foreach ($playList as $value) {
                 ?>
 
             }
+            .vjs-control-bar{
+                z-index: 1;
+            }
         </style>
 
         <?php
@@ -125,7 +128,6 @@ foreach ($playList as $value) {
         <script src="<?php echo $global['webSiteRootURL']; ?>plugin/PlayLists/videojs-playlist/videojs-playlist.js"></script>
         <script src="<?php echo $global['webSiteRootURL']; ?>plugin/PlayLists/videojs-playlist-ui/videojs-playlist-ui.js"></script>
         <script>
-            var player;
             if (typeof player === 'undefined') {
                 player = videojs('mainVideo');
             }
@@ -148,6 +150,11 @@ foreach ($playList as $value) {
                         $('#playList').fadeOut();
                     }, 1000);
 
+                });
+                
+                //Prevent HTML5 video from being downloaded (right-click saved)?
+                $('#mainVideo').bind('contextmenu', function () {
+                    return false;
                 });
             });
         </script>
