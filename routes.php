@@ -344,7 +344,7 @@ SimpleRouter::get($basePath.__("login"), function() {
 SimpleRouter::get($basePath."trending", function() {
     require_once "view/trending.php"; exit;
 });
-SimpleRouter::get($basePath."tagz", function() {
+SimpleRouter::get($basePath."tag", function() {
     require_once "view/?tags_id=$1"; exit;
 });
 ?>
