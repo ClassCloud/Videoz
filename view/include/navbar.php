@@ -884,7 +884,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                         <hr>
                     </li>
                     <?php
-                    if (empty($advancedCustom->disableHelpLeftMenu)) {
+                    if (!empty($advancedCustom->disableHelpLeftMenu)) {
                         ?>
                         <li>
                             <a href="<?php echo $global['webSiteRootURL']; ?>help">
@@ -895,7 +895,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                         <?php
                     }
 
-                    if (empty($advancedCustom->disableAboutLeftMenu)) {
+                    if (!empty($advancedCustom->disableAboutLeftMenu)) {
                         ?>
                         <li>
                             <a href="<?php echo $global['webSiteRootURL']; ?>about">
@@ -906,7 +906,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                         <?php
                     }
 
-                    if (empty($advancedCustom->disableContactLeftMenu)) {
+                    if (!empty($advancedCustom->disableContactLeftMenu)) {
                         ?>
                         <li>
                             <a href="<?php echo $global['webSiteRootURL']; ?>contact">
