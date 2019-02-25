@@ -46,7 +46,7 @@ foreach ($tags as $value) {
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#basicInfo" id="aBasicInfo"><?php echo __("Basic Info") ?></a></li>
 
-                                    <?php if (empty($advancedCustomUser->disablePersonalInfo)) { ?>
+                                    <?php if (!empty($advancedCustomUser->disablePersonalInfo)) { ?>
                                         <li><a data-toggle="tab" href="#personalInfo" id="aPersonalInfo"><?php echo __("Personal Info") ?></a></li>
                                     <?php } ?>
                                 </ul>
@@ -58,7 +58,7 @@ foreach ($tags as $value) {
                                         ?>
                                     </div>
 
-                                    <?php if (empty($advancedCustomUser->disablePersonalInfo)) { ?>
+                                    <?php if (!empty($advancedCustomUser->disablePersonalInfo)) { ?>
                                         <div id="personalInfo" class="tab-pane fade"  style="padding: 10px 0;">
                                             <?php
                                             include $global['systemRootPath'] . './view/userPersonalInfo.php';
