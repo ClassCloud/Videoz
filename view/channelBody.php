@@ -17,7 +17,8 @@ if (empty($_GET['current'])) {
 $current = $_POST['current'];
 $rowCount = 25;
 $_POST['rowCount'] = $rowCount;
-$uploadedVideos = Video::getAllVideos("a", $user_id);
+
+$uploadedVideos = Video::getAllVideosAsync("a", $user_id);
 $uploadedTotalVideos = Video::getTotalVideos("a", $user_id);
 
 $totalPages = ceil($uploadedTotalVideos / $rowCount);
