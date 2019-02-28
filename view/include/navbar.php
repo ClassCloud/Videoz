@@ -782,7 +782,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
 
 
                     <?php
-                    if (empty($advancedCustom->doNotShowLeftMenuAudioAndVideoButtons)) {
+                    if (!empty($advancedCustom->doNotShowLeftMenuAudioAndVideoButtons)) {
                         ?>
                         <li>
                             <hr>
