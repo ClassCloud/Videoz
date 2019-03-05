@@ -35,7 +35,7 @@ $playlists = PlayList::getAllFromUser($user_id, $publicOnly);
 ?>
 
 <?php
-$channelName = $_GET['channelName'];
+$channelName = @$_GET['channelName'];
 unset($_GET['channelName']);
 $startC = microtime(true);
 foreach ($playlists as $playlist) {
@@ -44,7 +44,7 @@ foreach ($playlists as $playlist) {
     $videosArrayId = PlayList::getVideosIdFromPlaylist($playlist['id']);
     @$timesC[__LINE__] += microtime(true) - $startC;
     $startC = microtime(true);
-    $videosP = Video::getAllVideosAsync("a", false, false, $videosArrayId);
+    $videosP = Video::getAllVideosAsync("viewable", false, true, $videosArrayId);
     @$timesC[__LINE__] += microtime(true) - $startC;
     $startC = microtime(true);
     //error_log("channelPlaylist videosP: ".json_encode($videosP));
