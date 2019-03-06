@@ -702,7 +702,7 @@ if (!class_exists('Video')) {
             $video = sqlDAL::fetchAssoc($res);
             sqlDAL::close($res);
             if ($res) {
-                return self::getVideo($video['id'], "", true);
+                return self::getVideo($video['id'], "", true,false,false,true);
 //$video['groups'] = UserGroups::getVideoGroups($video['id']);
             } else {
                 return false;
@@ -2347,7 +2347,7 @@ if (!class_exists('Video')) {
             global $global;
             $filePath = "{$global['systemRootPath']}videos/{$filename}";
 // Streamlined for less coding space.
-            $files = glob("{$filePath}_thumbs*.jpg");
+            $files = glob("{$filePath}*_thumbs*.jpg");
             foreach ($files as $file) {
                 if (file_exists($file)) {
                     @unlink($file);
