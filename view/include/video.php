@@ -9,6 +9,22 @@ if ($video['rotation'] === "90" || $video['rotation'] === "270") {
     $vjsClass = "vjs-16-9";
     $embedResponsiveClass = "embed-responsive-16by9";
 }
+$currentTime = 0;
+if (isset($_GET['t'])) {
+    $currentTime = intval($_GET['t']);
+} else if (!empty($video['progress']['lastVideoTime'])) {
+    $currentTime = intval($video['progress']['lastVideoTime']);
+    $maxCurrentTime = parseDurationToSeconds($video['duration']);
+    if ($maxCurrentTime <= $currentTime + 5) {
+        if (!empty($video['externalOptions']->videoStartSeconds)) {
+            $currentTime = intval($video['externalOptions']->videoStartSeconds);
+        } else {
+            $currentTime = 0;
+        }
+    }
+} else if (!empty($video['externalOptions']->videoStartSeconds)) {
+    $currentTime = intval($video['externalOptions']->videoStartSeconds);
+}
 ?>
 <div class="row main-video" id="mvideo">
     <div class="col-sm-2 col-md-2 firstC"></div>
@@ -30,7 +46,7 @@ if ($video['rotation'] === "90" || $video['rotation'] === "270") {
                            muted="muted"
                        <?php } ?>
                        preload="auto"
-                       poster="<?php echo $poster; ?>" controls class="embed-responsive-item video-js vjs-default-skin <?php echo $vjsClass; ?> vjs-big-play-centered" id="mainVideo" data-setup='{ "aspectRatio": "<?php echo $aspectRatio; ?>" }'>
+                       poster="<?php echo $poster; ?>" controls class="embed-responsive-item video-js vjs-default-skin <?php echo $vjsClass; ?> vjs-big-play-centered" id="mainVideo" >
                            <?php if ($playNowVideo['type'] == "video") { ?>
                         <!-- <?php echo $playNowVideo['title'], " ", $playNowVideo['filename']; ?> -->
                         <?php
@@ -58,8 +74,8 @@ if ($video['rotation'] === "90" || $video['rotation'] === "270") {
                 <?php } ?>
 
             </div>
-            
-            <a href="<?php echo $_SERVER["HTTP_REFERER"]; ?>" class="btn btn-outline btn-xs" style="position: absolute; top: 5px; right: 5px; display: none;" id="youtubeModeOnFullscreenCloseButton">
+
+            <a href="<?php echo $global["HTTP_REFERER"]; ?>" class="btn btn-outline btn-xs" style="position: absolute; top: 5px; right: 5px; display: none;" id="youtubeModeOnFullscreenCloseButton">
                 <i class="fas fa-times"></i>
             </a>
         </div>
@@ -145,50 +161,25 @@ if ($playNowVideo['type'] == "linkVideo") {
 
 <?php if ($config->getAutoplay()) {
     ?>
-    <?php
-    if (isset($_GET['t'])) {
-        ?>
-                                                player.currentTime(<?php echo intval($_GET['t']); ?>);
-        <?php
-    } else if (!empty($video['progress']['lastVideoTime'])) {
-        ?>
-                                                player.currentTime(<?php echo intval($video['progress']['lastVideoTime']); ?>);
-        <?php
-    } else if (!empty($video['externalOptions']->videoStartSeconds)) {
-        ?>
-                                                player.currentTime(<?php echo intval($video['externalOptions']->videoStartSeconds); ?>);
-        <?php
-    }
-    ?>
                                             setTimeout(function () {
                                                 if (typeof player === 'undefined') {
                                                     player = videojs('mainVideo');
                                                 }
                                                 try {
+                                                    player.currentTime(<?php echo $currentTime; ?>);
                                                     player.play();
                                                 } catch (e) {
                                                     setTimeout(function () {
+                                                        player.currentTime(<?php echo $currentTime; ?>);
                                                         player.play();
                                                     }, 1000);
                                                 }
                                             }, 150);
-<?php } else {
-    ?>
-    <?php
-    if (isset($_GET['t'])) {
-        ?>
-                                                player.currentTime(<?php echo intval($_GET['t']); ?>);
-        <?php
-    } else if (!empty($video['progress']['lastVideoTime'])) {
-        ?>
-                                                player.currentTime(<?php echo intval($video['progress']['lastVideoTime']); ?>);
-        <?php
-    } else if (!empty($video['externalOptions']->videoStartSeconds)) {
-        ?>
-                                                player.currentTime(<?php echo intval($video['externalOptions']->videoStartSeconds); ?>);
-        <?php
-    }
-    ?>
+<?php } else { ?>
+    
+                                            if (typeof player !== 'undefined') {
+                                                player.currentTime(<?php echo $currentTime; ?>);
+                                            }
                                             if (Cookies.get('autoplay') && Cookies.get('autoplay') !== 'false') {
                                                 setTimeout(function () {
                                                     if (typeof player === 'undefined') {
@@ -198,21 +189,7 @@ if ($playNowVideo['type'] == "linkVideo") {
                                                         player.play();
                                                     } catch (e) {
                                                         setTimeout(function () {
-    <?php
-    if (isset($_GET['t'])) {
-        ?>
-                                                                player.currentTime(<?php echo intval($_GET['t']); ?>);
-        <?php
-    } else if (!empty($video['progress']['lastVideoTime'])) {
-        ?>
-                                                                player.currentTime(<?php echo intval($video['progress']['lastVideoTime']); ?>);
-        <?php
-    } else if (!empty($video['externalOptions']->videoStartSeconds)) {
-        ?>
-                                                                player.currentTime(<?php echo intval($video['externalOptions']->videoStartSeconds); ?>);
-        <?php
-    }
-    ?>
+                                                            player.currentTime(<?php echo $currentTime; ?>);
                                                             player.play();
                                                         }, 1000);
                                                     }
