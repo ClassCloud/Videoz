@@ -467,7 +467,6 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                                 <li>
                                                     <a href="<?php echo $global['webSiteRootURL']; ?>mvideos">
                                                         <span class="glyphicon glyphicon-film"></span>
-                                                        <span class="glyphicon glyphicon-headphones"></span>
                                                         <?php echo __("My videos"); ?>
                                                     </a>
                                                 </li>
