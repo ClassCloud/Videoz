@@ -11,13 +11,14 @@
         ?>
         <ul class="list-inline">
             <li>
-                Powered by <a href="http://www.youphptube.com" class="external btn btn-outline btn-primary btn-xs" target="_blank">YouPHPTube LLC v<?php echo $config->getVersion(); ?></a>
+                Powered by <a href="http://www.youphptube.com" class="external btn btn-outline btn-primary btn-xs" target="_blank">YouPHPTube LLC v
+                </a>
             </li>
             <li>
-                <a href="https://www.facebook.com/mediasharingtube/" class="external btn btn-outline btn-primary btn-xs" target="_blank"><span class="sr-only">Facebook</span><i class="fab fa-facebook-square"></i></a>
+                <a href="https://www.facebook.com/classcloud/" class="external btn btn-outline btn-primary btn-xs" target="_blank"><span class="sr-only">Facebook</span><i class="fab fa-facebook-square"></i></a>
             </li>
             <li>
-                <a href="https://plus.google.com/u/0/113820501552689289262" class="external btn btn-outline btn-primary btn-xs" target="_blank"><span class="sr-only">Google Plus</span><i class="fab fa-google-plus-g"></i></a>
+                <a href="https://twitter.com/ClassCloudCa" class="external btn btn-outline btn-primary btn-xs" target="_blank"><span class="sr-only">Twitter</span><i class="fab fa-twitter-square"></i></a>
             </li>
         </ul>
         <?php
