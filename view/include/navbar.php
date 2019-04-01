@@ -457,7 +457,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                             <li>
                                                 <a href="<?php echo User::getChannelLink(); ?>" >
                                                     <span class="fab fa-youtube"></span>
-                                                    <?php echo __("My Channel"); ?>
+                                                    <?php echo __($advancedCustomUser->MyChannelLabel); ?>
                                                 </a>
                                             </li>
 
@@ -499,7 +499,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                                     <li>
                                                         <a href="<?php echo $global['webSiteRootURL']; ?>categories">
                                                             <span class="glyphicon glyphicon-list"></span>
-                                                            <?php echo __("Categories"); ?>
+                                                            <?php echo __($advancedCustom->CategoryLabel); ?>
                                                         </a>
 
                                                     </li>
@@ -630,7 +630,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                 <div>
                                     <a href="<?php echo User::getChannelLink(); ?>" class="btn btn-danger btn-block" style="border-radius: 0;">
                                         <span class="fab fa-youtube"></span>
-                                        <?php echo __("My Channel"); ?>
+                                        <?php echo __($advancedCustomUser->MyChannelLabel); ?>
                                     </a>
 
                                 </div>
@@ -682,7 +682,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                         <div>
                                             <a href="<?php echo $global['webSiteRootURL']; ?>categories" class="btn btn-info btn-block" style="border-radius: 0;">
                                                 <span class="glyphicon glyphicon-list"></span>
-                                                <?php echo __("Categories"); ?>
+                                                <?php echo __($advancedCustom->CategoryLabel); ?>
                                             </a>
                                         </div>
                                     </li>
@@ -746,7 +746,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                                 <li>
                                     <a href="<?php echo $global['webSiteRootURL']; ?>categories">
                                         <span class="glyphicon glyphicon-list"></span>
-                                        <?php echo __("Categories"); ?>
+                                        <?php echo __($advancedCustom->CategoryLabel); ?>
                                     </a>
                                 </li>
                                 <li>
@@ -840,7 +840,7 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                     </li>
                     <!-- categories -->
                     <li>
-                        <h3 class="text-danger"><?php echo __("Categories"); ?></h3>
+                        <h3 class="text-danger"><?php echo __($advancedCustom->CategoryLabel); ?></h3>
                     </li>
                     <?php
                     if (!function_exists('mkSub')) {
@@ -868,12 +868,17 @@ if (((empty($advancedCustomUser->userMustBeLoggedIn) && empty($advancedCustom->d
                     if (empty($advancedCustom->doNotDisplayCategoryLeftMenu)) {
                         $categories = Category::getAllCategories();
                         foreach ($categories as $value) {
-                            if (empty($value['total'])) {
+                            if($advancedCustom->ShowAllVideosOnCategory){
+                                $total = $value['fullTotal'];
+                            }else{
+                                $total = $value['total'];
+                            }
+                            if (empty($total)) {
                                 continue;
                             }
                             echo '<li class="' . ($value['clean_name'] == @$_GET['catName'] ? "active" : "") . '">'
                             . '<a href="' . $global['webSiteRootURL'] . 'cat/' . $value['clean_name'] . '" >'
-                            . '<span class="' . (empty($value['iconClass']) ? "fa fa-folder" : $value['iconClass']) . '"></span>  ' . $value['name'] . ' <span class="badge">' . $value['total'] . '</span></a>';
+                            . '<span class="' . (empty($value['iconClass']) ? "fa fa-folder" : $value['iconClass']) . '"></span>  ' . $value['name'] . ' <span class="badge">' . $total . '</span></a>';
                             mkSub($value['id']);
                             echo '</li>';
                         }

@@ -78,6 +78,10 @@ abstract class PluginAbstract {
     public function getVideosManagerListButton() {
         return "";
     }
+    
+    public function getUsersManagerListButton() {
+        return "";
+    }
 
     public function getTags() {
         
@@ -279,7 +283,7 @@ abstract class PluginAbstract {
      * 
      * @return type return a list of IDs of the user groups
      */
-    public function getDynamicUserGroupsId() {
+    public function getDynamicUserGroupsId($users_id) {
         return array();
     }
 
@@ -351,6 +355,10 @@ abstract class PluginAbstract {
     }
 
     function getVideo() {
+        return null;
+    }
+    
+    public function onUserSignIn($users_id){
         return null;
     }
     

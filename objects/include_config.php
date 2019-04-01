@@ -54,6 +54,11 @@ if (!empty($_SERVER["HTTP_REFERER"])) {
         $url1 = parse_url($global["HTTP_REFERER"]);
     }
 }
+
+if(!isset($_POST['redirectUri'])){
+    $_POST['redirectUri'] = "";
+}
+
 $url2 = parse_url($global['webSiteRootURL']);
 if ($url1['host'] !== $url2['host']) {
     $global["HTTP_REFERER"] = $global['webSiteRootURL'];
@@ -82,6 +87,6 @@ if (empty($global['bodyClass'])) {
     $global['bodyClass'] = "";
 }
 $global['allowedExtension'] = array('gif', 'jpg', 'mp4', 'webm', 'mp3', 'ogg', 'zip');
-$advancedCustom = YouPHPTubePlugin::getObjectDataIfEnabled("CustomizeAdvanced");
-$advancedCustomUser = YouPHPTubePlugin::getObjectDataIfEnabled("CustomizeUser");
+$advancedCustom = YouPHPTubePlugin::getObjectData("CustomizeAdvanced");
+$advancedCustomUser = YouPHPTubePlugin::getObjectData("CustomizeUser");
 $sitemapFile = "{$global['systemRootPath']}sitemap.xml";

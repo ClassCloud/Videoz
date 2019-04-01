@@ -63,6 +63,14 @@ class CustomizeUser extends PluginAbstract {
         $obj->signUpRequestUploadRights = false;
         $obj->signUpRequestLivestreamRights = false;
         
+        $obj->doNotShowTopBannerOnChannel = false;
+        
+        $obj->doNotShowMyChannelNameOnBasicInfo = false;
+        $obj->doNotShowMyAnalyticsCodeOnBasicInfo = false;
+        $obj->doNotShowMyAboutOnBasicInfo = false;
+        
+        $obj->MyChannelLabel = "My Channel";
+        
         
         return $obj;
     }
