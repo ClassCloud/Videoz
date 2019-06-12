@@ -37,11 +37,11 @@ if (file_exists($path)) {
         header('Pragma: public');
     }
     YouPHPTubePlugin::xsendfilePreVideoPlay();
-    if (!empty($advancedCustom->doNotUseXsendFile)) {
+    if (empty($advancedCustom->doNotUseXsendFile)) {
         //error_log("X-Sendfile: {$path}");
         header("X-Sendfile: {$path}");
     }
-    if (!empty($_GET['download'])) {
+    if (empty($_GET['download'])) {
         header("Content-type: " . mime_content_type($path));
     }
     header('Content-Length: ' . filesize($path));
